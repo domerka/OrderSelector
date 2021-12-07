@@ -10,6 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderSelector">
         <activity
+            android:name=".Order"
+            android:exported="false"
+            android:label="Order players"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".SelectFirst"
+            android:exported="false"
+            android:label="Select first player"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
