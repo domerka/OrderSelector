@@ -1,5 +1,4 @@
 package com.example.orderselector
-
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -11,13 +10,11 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 
-
-class DrawCircleView(context: Context, attrs: AttributeSet) : View(context, attrs) {
-
+class SelectFirstView (context: Context, attrs: AttributeSet) : View(context, attrs) {
     private val colors = intArrayOf(
-    Color.BLUE, Color.GREEN, Color.MAGENTA,
-    Color.WHITE, Color.CYAN, Color.GRAY, Color.RED, Color.DKGRAY,
-    Color.LTGRAY, Color.YELLOW
+        Color.BLUE, Color.GREEN, Color.MAGENTA,
+        Color.WHITE, Color.CYAN, Color.GRAY, Color.RED, Color.DKGRAY,
+        Color.LTGRAY, Color.YELLOW
     )
 
     private var mActivePointers: Array<Boolean> = Array(10){false}
@@ -26,7 +23,6 @@ class DrawCircleView(context: Context, attrs: AttributeSet) : View(context, attr
     private var isTimerDone : Boolean = false
 
     private var positions : Array<PointF> = Array(10){ PointF() }
-
     private val randoNumbers: MutableList<Int> = mutableListOf()
 
     private var numberOfPointers = 0
@@ -47,7 +43,6 @@ class DrawCircleView(context: Context, attrs: AttributeSet) : View(context, attr
         when(event.actionMasked){
             MotionEvent.ACTION_DOWN -> {
                 if(isTimerDone){
-                    randoNumbers.clear()
                     numberOfPointers = 0
                     positions = Array(10){ PointF() }
                     mActivePointers = Array(10){false}
@@ -113,29 +108,32 @@ class DrawCircleView(context: Context, attrs: AttributeSet) : View(context, attr
         textPaint.textSize = 100f
         textPaint.color = Color.WHITE
         canvas?.drawColor(Color.BLACK)
-        var k = 0
+        var i = 0
         if(isTimerDone){
-            while (k < numberOfPointers){
-                randoNumbers.add(++k)
-                print(k.toString())
+            while (i < 10) {
+                if(mActivePointers[i]){
+                    randoNumbers.add(i)
+                }
+                i++
             }
             randoNumbers.shuffle()
-            k = 0
+            val id = randoNumbers[0]
+            paint.color = colors[id]
+            val point: PointF = positions[id]
+            canvas?.drawCircle(point.x, point.y, 120F, paint)
+            canvas?.drawText("1",point.x+110f,point.y,textPaint)
         }
-        var i = 0
-        while (i < 10) {
-            if(mActivePointers[i]){
-                paint.color = colors[i]
-                val point: PointF = positions[i]
-                canvas?.drawCircle(point.x, point.y, 120F, paint)
-                if(isTimerDone){
-                    canvas?.drawText(randoNumbers[k].toString(),point.x+110f,point.y,textPaint)
-                    k++
+        else
+        {
+            while (i < 10) {
+                if(mActivePointers[i]){
+                    paint.color = colors[i]
+                    val point: PointF = positions[i]
+                    canvas?.drawCircle(point.x, point.y, 120F, paint)
                 }
+                i++
             }
-            i++
         }
 
     }
-
 }

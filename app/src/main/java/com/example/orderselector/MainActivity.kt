@@ -12,18 +12,24 @@ import android.widget.Button
 class MainActivity : AppCompatActivity() {
     lateinit var orderPlayersButton : Button
     lateinit var selectFirstPlayerButton : Button
+    lateinit var flipCoinButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         orderPlayersButton = findViewById(R.id.order_players_button)
         selectFirstPlayerButton = findViewById(R.id.select_first_player_button)
+        flipCoinButton = findViewById(R.id.flip_coin_button)
         orderPlayersButton.setOnClickListener {
             openActivityOrderPlayers()
         }
         selectFirstPlayerButton.setOnClickListener {
             openActivitySelectFirstPlayer()
         }
+        flipCoinButton.setOnClickListener{
+            openActivityFlipCoin()
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -44,16 +50,28 @@ class MainActivity : AppCompatActivity() {
             this.startActivity(intent)
             return true
         }
+
+        if(item.itemId == R.id.flip_coin){
+            val intent = Intent(this,FlipCoin::class.java)
+            this.startActivity(intent)
+            return true
+        }
+
         return super.onOptionsItemSelected(item)
     }
 
-    fun openActivityOrderPlayers(){
+    private fun openActivityOrderPlayers(){
         val intent = Intent(this,Order::class.java)
         this.startActivity(intent)
     }
 
-    fun openActivitySelectFirstPlayer(){
+    private fun openActivitySelectFirstPlayer(){
         val intent = Intent(this,SelectFirst::class.java)
+        this.startActivity(intent)
+    }
+
+    private fun openActivityFlipCoin(){
+        val intent = Intent(this,FlipCoin::class.java)
         this.startActivity(intent)
     }
 }

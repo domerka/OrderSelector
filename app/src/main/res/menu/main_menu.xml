@@ -11,6 +11,11 @@
         android:title="Order players"
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/flip_coin"
+        android:title="Flip coin"
+        app:showAsAction="never"/>
+
 
 
 </menu>
