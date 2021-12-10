@@ -34,7 +34,6 @@ class FlipCoin : AppCompatActivity() {
             duration = 1000
             rotationYBy(1800F)
             ivCoin.isClickable = false
-
         }.withEndAction{
             ivCoin.setImageResource(imageId)
             Toast.makeText(this,coinSide,Toast.LENGTH_SHORT).show()

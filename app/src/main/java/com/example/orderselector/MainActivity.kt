@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var orderPlayersButton : Button
     lateinit var selectFirstPlayerButton : Button
     lateinit var flipCoinButton : Button
+    lateinit var rollDiceButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         orderPlayersButton = findViewById(R.id.order_players_button)
         selectFirstPlayerButton = findViewById(R.id.select_first_player_button)
         flipCoinButton = findViewById(R.id.flip_coin_button)
+        rollDiceButton = findViewById(R.id.roll_dice_button)
         orderPlayersButton.setOnClickListener {
             openActivityOrderPlayers()
         }
@@ -28,6 +30,9 @@ class MainActivity : AppCompatActivity() {
         }
         flipCoinButton.setOnClickListener{
             openActivityFlipCoin()
+        }
+        rollDiceButton.setOnClickListener {
+            openActivityRollDice()
         }
 
     }
@@ -57,6 +62,12 @@ class MainActivity : AppCompatActivity() {
             return true
         }
 
+        if(item.itemId == R.id.roll_dice){
+            val intent = Intent(this,RollDice::class.java)
+            this.startActivity(intent)
+            return true
+        }
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -72,6 +83,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun openActivityFlipCoin(){
         val intent = Intent(this,FlipCoin::class.java)
+        this.startActivity(intent)
+    }
+
+    private fun openActivityRollDice(){
+        val intent = Intent(this,RollDice::class.java)
         this.startActivity(intent)
     }
 }

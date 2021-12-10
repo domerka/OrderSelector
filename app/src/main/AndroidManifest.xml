@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderSelector">
         <activity
+            android:name=".RollDice"
+            android:exported="false" />
+        <activity
             android:name=".FlipCoin"
             android:exported="false" />
         <activity

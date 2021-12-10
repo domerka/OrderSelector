@@ -16,6 +16,11 @@
         android:title="Flip coin"
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/roll_dice"
+        android:title="Roll dice"
+        app:showAsAction="never"/>
+
 
 
 </menu>
