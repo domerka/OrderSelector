@@ -4,27 +4,33 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderSelector">
         <activity
-            android:name=".RollDice"
-            android:exported="false" />
-        <activity
-            android:name=".FlipCoin"
-            android:exported="false" />
-        <activity
             android:name=".Order"
             android:exported="false"
-            android:label="Order players"
+            android:label="@string/order_button_name"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SelectFirst"
             android:exported="false"
-            android:label="Select first player"
+            android:label="@string/select_first_button_name"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".RollDice"
+            android:exported="false"
+            android:label="@string/roll_dice_button_name"
+            android:parentActivityName=".MainActivity"
+            />
+        <activity
+            android:name=".FlipCoin"
+            android:exported="false"
+            android:label="@string/flip_coin_button_name"
+            android:parentActivityName=".MainActivity"
+            />
         <activity
             android:name=".MainActivity"
             android:exported="true">

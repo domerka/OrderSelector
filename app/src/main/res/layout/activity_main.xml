@@ -1,40 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
 
     <Button
         android:id="@+id/order_players_button"
-        android:layout_width="250dp"
-        android:layout_height="100dp"
+        android:layout_width="300dp"
+        android:layout_height="125dp"
         android:layout_weight="1"
-        android:text="Order players" />
+        android:gravity="start|center"
+        android:paddingStart="15dp"
+        android:textColor="@color/black"
+        android:backgroundTint="#90ee90"
+        android:text= "@string/order_button_name"
+        />
 
     <Button
         android:id="@+id/select_first_player_button"
-        android:layout_width="250dp"
-        android:layout_height="100dp"
+        android:layout_width="300dp"
+        android:layout_height="125dp"
         android:layout_weight="1"
-        android:text="Select first player" />
+        android:textColor="@color/black"
+        android:gravity="start|center"
+        android:paddingStart="15dp"
+        android:backgroundTint="#90ee90"
+        android:text="@string/select_first_button_name"
+        />
 
-    <Button
-        android:id="@+id/flip_coin_button"
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_weight="1"
-        android:text="Flip coin" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/roll_dice_button"
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_weight="1"
-        android:text="Roll dice" />
+
+        <Button
+            android:id="@+id/flip_coin_button"
+            android:layout_width="300dp"
+            android:layout_height="125dp"
+            android:layout_weight="1"
+            android:gravity="start|center"
+            android:textColor="@color/black"
+            android:backgroundTint="#90ee90"
+            android:paddingStart="15dp"
+            android:text="@string/flip_coin_button_name" />
+
+        <ImageView
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_gravity="center|end"
+            android:src="@drawable/ic_coin_icon"
+            android:paddingEnd="15dp"
+            android:elevation="5dp"
+            />
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <Button
+            android:id="@+id/roll_dice_button"
+            android:layout_width="300dp"
+            android:layout_height="125dp"
+            android:textColor="@color/black"
+            android:layout_gravity="bottom"
+            android:gravity="start|center"
+            android:paddingStart="15dp"
+            android:backgroundTint="#90ee90"
+            android:text="@string/roll_dice_button_name"
+
+            />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center|end"
+            android:src="@drawable/ic_dice_icon"
+            android:elevation="5dp"
+            />
+
+
+
+    </FrameLayout>
+
 
 </LinearLayout>

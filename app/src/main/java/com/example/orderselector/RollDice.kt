@@ -1,20 +1,17 @@
 package com.example.orderselector
 
-import android.animation.Animator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import android.widget.Toast
 
 class RollDice : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_roll_dice)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         onDiceTap()
     }
 
@@ -24,22 +21,22 @@ class RollDice : AppCompatActivity() {
 
             when((1..6).random()){
                 1 -> {
-                    rollTheDice(R.drawable.ic_diceone, "One")
+                    rollTheDice(R.drawable.ic_diceone)
                 }
                 2 -> {
-                    rollTheDice(R.drawable.ic_dicetwo, "Two")
+                    rollTheDice(R.drawable.ic_dicetwo)
                 }
                 3 -> {
-                    rollTheDice(R.drawable.ic_dicethree, "Three")
+                    rollTheDice(R.drawable.ic_dicethree)
                 }
                 4 -> {
-                    rollTheDice(R.drawable.ic_dicefour, "Four")
+                    rollTheDice(R.drawable.ic_dicefour)
                 }
                 5 -> {
-                    rollTheDice(R.drawable.ic_dicefive, "Five")
+                    rollTheDice(R.drawable.ic_dicefive)
                 }
                 6 -> {
-                    rollTheDice(R.drawable.ic_dicesix, "Six")
+                    rollTheDice(R.drawable.ic_dicesix)
                 }
             }
         }
@@ -47,7 +44,7 @@ class RollDice : AppCompatActivity() {
 
 
 
-    private fun rollTheDice(imageId: Int, diceSide: String){
+    private fun rollTheDice(imageId: Int){
         val diceList = listOf(R.drawable.ic_diceone,R.drawable.ic_dicetwo,R.drawable.ic_dicethree,R.drawable.ic_dicefour,R.drawable.ic_dicefive,R.drawable.ic_dicesix)
         val anim : AnimationSet = AnimationUtils.loadAnimation(this,R.anim.rotate) as AnimationSet
         val ivDice = findViewById<ImageView>(R.id.iv_dice)
@@ -61,8 +58,6 @@ class RollDice : AppCompatActivity() {
                 override fun onAnimationEnd(animation: Animation?) {
                     ivDice.isClickable = true
                     ivDice.setImageResource(imageId)
-
-                    Toast.makeText(applicationContext,diceSide,Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onAnimationRepeat(animation: Animation?) {

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Játékos választó</string>
+    <string name="order_button_name">Játékosok sorba rendzése</string>
+    <string name="select_first_button_name">Kezdő játékos választása</string>
+    <string name="flip_coin_button_name">Érme feldobás</string>
+    <string name="roll_dice_button_name">Kocka dobás</string>
+    <string name="flip_coin_heads_message">Fej!</string>
+    <string name="flip_coin_tails_message">Írás!</string>
+    <string name="finish_toast_message">Kész!</string>
+</resources>

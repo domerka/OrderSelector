@@ -1,5 +1,6 @@
 package com.example.orderselector
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -60,7 +61,8 @@ class SelectFirstView (context: Context, attrs: AttributeSet) : View(context, at
                     override fun onFinish() {
                         isTimerDone = true
                         invalidate()
-                        Toast.makeText(context,"Finish!",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context,
+                           context.getString(R.string.finish_toast_message),Toast.LENGTH_SHORT).show()
                     }
                 }.start()
                 numberOfPointers++

@@ -1,6 +1,7 @@
 package com.example.orderselector
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -10,6 +11,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
+import android.os.Bundle
 
 
 class DrawCircleView(context: Context, attrs: AttributeSet) : View(context, attrs) {
@@ -65,7 +67,7 @@ class DrawCircleView(context: Context, attrs: AttributeSet) : View(context, attr
                     override fun onFinish() {
                         isTimerDone = true
                         invalidate()
-                        Toast.makeText(context,"Finish!",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, context.getString(R.string.finish_toast_message),Toast.LENGTH_SHORT).show()
                     }
                 }.start()
                 numberOfPointers++
