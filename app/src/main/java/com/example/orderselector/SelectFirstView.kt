@@ -13,9 +13,11 @@ import android.widget.Toast
 
 class SelectFirstView (context: Context, attrs: AttributeSet) : View(context, attrs) {
     private val colors = intArrayOf(
-        Color.BLUE, Color.GREEN, Color.MAGENTA,
-        Color.WHITE, Color.CYAN, Color.GRAY, Color.RED, Color.DKGRAY,
-        Color.LTGRAY, Color.YELLOW
+        Color.rgb(148,0,211),Color.rgb(75,0,130),
+        Color.rgb(0,0,255),Color.rgb(0,255,0),
+        Color.rgb(255,255,0),Color.rgb(255,127,0),
+        Color.rgb(255,0,0),Color.rgb(51,255,255),
+        Color.rgb(255,102,178),Color.rgb(51,0,0)
     )
 
     private var mActivePointers: Array<Boolean> = Array(10){false}
@@ -68,6 +70,10 @@ class SelectFirstView (context: Context, attrs: AttributeSet) : View(context, at
                 numberOfPointers++
             }
             MotionEvent.ACTION_POINTER_DOWN ->{
+                if(numberOfPointers == 10){
+                    Toast.makeText(context,"No more players possible!",Toast.LENGTH_SHORT).show()
+                    return false
+                }
                 val f = PointF()
                 f.x = event.getX(pointerIndex)
                 f.y = event.getY(pointerIndex)
@@ -98,6 +104,7 @@ class SelectFirstView (context: Context, attrs: AttributeSet) : View(context, at
             }
             MotionEvent.ACTION_CANCEL -> {
                 mActivePointers[pointerId] = false
+                numberOfPointers--
             }
         }
         if(!isTimerDone) invalidate()
@@ -118,12 +125,31 @@ class SelectFirstView (context: Context, attrs: AttributeSet) : View(context, at
                 }
                 i++
             }
+            i = 0
             randoNumbers.shuffle()
-            val id = randoNumbers[0]
-            paint.color = colors[id]
-            val point: PointF = positions[id]
-            canvas?.drawCircle(point.x, point.y, 120F, paint)
-            canvas?.drawText("1",point.x+110f,point.y,textPaint)
+            while(i < 10){
+                var k = 0
+                if(i == randoNumbers[0]){
+                    val id = randoNumbers[0]
+                    val point: PointF = positions[id]
+                    paint.color = colors[i]
+                    canvas?.drawText("1",point.x+110f,point.y,textPaint)
+                    canvas?.drawCircle(point.x, point.y, 120F, paint)
+                }else{
+                    while(k < randoNumbers.size){
+                        if(i == randoNumbers[k]){
+                            val id = randoNumbers[k]
+                            val point: PointF = positions[id]
+                            paint.color = Color.DKGRAY
+                            canvas?.drawCircle(point.x, point.y, 120F, paint)
+                            break
+                        }
+                        k++
+                    }
+                }
+                i++
+            }
+
         }
         else
         {

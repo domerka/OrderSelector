@@ -17,9 +17,11 @@ import android.os.Bundle
 class DrawCircleView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     private val colors = intArrayOf(
-    Color.BLUE, Color.GREEN, Color.MAGENTA,
-    Color.WHITE, Color.CYAN, Color.GRAY, Color.RED, Color.DKGRAY,
-    Color.LTGRAY, Color.YELLOW
+        Color.rgb(148,0,211),Color.rgb(75,0,130),
+        Color.rgb(0,0,255),Color.rgb(0,255,0),
+        Color.rgb(255,255,0),Color.rgb(255,127,0),
+        Color.rgb(255,0,0),Color.rgb(51,255,255),
+        Color.rgb(255,102,178),Color.rgb(51,0,0)
     )
 
     private var mActivePointers: Array<Boolean> = Array(10){false}
@@ -103,6 +105,7 @@ class DrawCircleView(context: Context, attrs: AttributeSet) : View(context, attr
             }
             MotionEvent.ACTION_CANCEL -> {
                 mActivePointers[pointerId] = false
+                numberOfPointers--
             }
         }
         if(!isTimerDone) invalidate()
