@@ -133,8 +133,8 @@ class DrawCircleView(context: Context, attrs: AttributeSet) : View(context, attr
             firstCall = false
         }
         //Progress bar drawing
-        paint.color = Color.GREEN
-        canvas?.drawRect(0f,0f,progressWidth,20f,paint)
+        paint.color = Color.WHITE
+        canvas?.drawRect(0f,0f,progressWidth,15f,paint)
 
 
         textPaint.textSize = 100f

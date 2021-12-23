@@ -129,8 +129,8 @@ class SelectFirstView (context: Context, attrs: AttributeSet) : View(context, at
             firstCall = false
         }
         //Progress bar drawing
-        paint.color = Color.GREEN
-        canvas?.drawRect(0f, 0f, progressWidth, 20f, paint)
+        paint.color = Color.WHITE
+        canvas?.drawRect(0f, 0f, progressWidth, 15f, paint)
 
         var k = 0
         if (isTimerDone) {
