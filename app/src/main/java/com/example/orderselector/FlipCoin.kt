@@ -1,9 +1,10 @@
 package com.example.orderselector
 
+import android.app.Dialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
-import android.view.View
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -44,5 +45,25 @@ class FlipCoin : AppCompatActivity() {
             Toast.makeText(this,coinSide,Toast.LENGTH_SHORT).show()
             ivCoin.isClickable = true
         }.start()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.infos,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.show_info){
+            val settingsDialog = Dialog(this)
+            settingsDialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
+
+            settingsDialog.setContentView( layoutInflater.inflate(R.layout.popupimage_layout,null))
+
+            settingsDialog.findViewById<TextView>(R.id.popup_text).text = getString(R.string.flip_coin_info)
+
+            settingsDialog.show()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

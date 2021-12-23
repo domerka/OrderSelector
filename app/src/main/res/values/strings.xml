@@ -9,4 +9,9 @@
     <string name="flip_coin_tails_message"> Tails! </string>
     <string name="finish_toast_message"> Finish! </string>
 
+    <string name="order_players_info"> Each player place a finger on the screen, after 3 seconds the ordering is finished. </string>
+    <string name="first_player_info"> Each player place a finger on the screen, after 3 seconds the first player gets chosen. </string>
+    <string name="flip_coin_info"> Click the coin to flip it. </string>
+    <string name="roll_dice_info"> Click the dice to roll it. </string>
+
 </resources>

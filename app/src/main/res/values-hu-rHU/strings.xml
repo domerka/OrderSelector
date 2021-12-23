@@ -8,4 +8,8 @@
     <string name="flip_coin_heads_message">Fej!</string>
     <string name="flip_coin_tails_message">Írás!</string>
     <string name="finish_toast_message">Kész!</string>
+    <string name="order_players_info">Minden játékos helyezze egy ujját a képernyőre, 3 másodperc elteltével a sorrend készen áll.</string>
+    <string name="first_player_info">Minden játékos helyezze egy ujját a képernyőre, 3 másodperc elteltével a kezdő játékos kiválasztódik.</string>
+    <string name="flip_coin_info">Kattints az érmére, hogy feldobójon.</string>
+    <string name="roll_dice_info">Kattints a kockára, hogy eldobódjon.</string>
 </resources>

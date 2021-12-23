@@ -30,6 +30,10 @@ class SelectFirstView (context: Context, attrs: AttributeSet) : View(context, at
 
     private var numberOfPointers = 0
 
+    private var progressWidth = 0.0f
+    private var screenWidth = 0.0f
+    private var firstCall = true
+
     private var timer : CountDownTimer = object: CountDownTimer(0,0){
         override fun onTick(millisUntilFinished: Long) {
         }
@@ -57,14 +61,15 @@ class SelectFirstView (context: Context, attrs: AttributeSet) : View(context, at
                 f.y = event.getY(pointerIndex)
                 mActivePointers[pointerId] = true
                 positions[pointerId] = f
-                timer = object : CountDownTimer(3000, 1000) {
+                timer = object : CountDownTimer(2000, 40) {
                     override fun onTick(millisUntilFinished: Long) {
+                        progressWidth -= screenWidth/50
+                        invalidate()
                     }
                     override fun onFinish() {
+                        progressWidth -= screenWidth/50
                         isTimerDone = true
                         invalidate()
-                        Toast.makeText(context,
-                           context.getString(R.string.finish_toast_message),Toast.LENGTH_SHORT).show()
                     }
                 }.start()
                 numberOfPointers++
@@ -94,13 +99,13 @@ class SelectFirstView (context: Context, attrs: AttributeSet) : View(context, at
                 }
             }
             MotionEvent.ACTION_UP ->{
+                progressWidth = screenWidth
                 mActivePointers[pointerId] = false
                 numberOfPointers--
             }
             MotionEvent.ACTION_POINTER_UP ->{
                 mActivePointers[pointerId] = false
                 numberOfPointers--
-                //Toast.makeText(context,test.size.toString(),Toast.LENGTH_SHORT).show()
             }
             MotionEvent.ACTION_CANCEL -> {
                 mActivePointers[pointerId] = false
@@ -117,51 +122,45 @@ class SelectFirstView (context: Context, attrs: AttributeSet) : View(context, at
         textPaint.textSize = 100f
         textPaint.color = Color.WHITE
         canvas?.drawColor(Color.BLACK)
+
+        if (canvas != null && firstCall) {
+            progressWidth = canvas.width.toFloat()
+            screenWidth = canvas.width.toFloat()
+            firstCall = false
+        }
+        //Progress bar drawing
+        paint.color = Color.GREEN
+        canvas?.drawRect(0f, 0f, progressWidth, 20f, paint)
+
+        var k = 0
+        if (isTimerDone) {
+            while (k < 10) {
+                if (mActivePointers[k]) {
+                    randoNumbers.add(k)
+                }
+                k++
+            }
+            if(randoNumbers.size > 1){
+                randoNumbers.shuffle()
+            }
+        }
         var i = 0
-        if(isTimerDone){
-            while (i < 10) {
-                if(mActivePointers[i]){
-                    randoNumbers.add(i)
-                }
-                i++
-            }
-            i = 0
-            randoNumbers.shuffle()
-            while(i < 10){
-                var k = 0
-                if(i == randoNumbers[0]){
-                    val id = randoNumbers[0]
-                    val point: PointF = positions[id]
-                    paint.color = colors[i]
-                    canvas?.drawText("1",point.x+110f,point.y,textPaint)
-                    canvas?.drawCircle(point.x, point.y, 120F, paint)
-                }else{
-                    while(k < randoNumbers.size){
-                        if(i == randoNumbers[k]){
-                            val id = randoNumbers[k]
-                            val point: PointF = positions[id]
-                            paint.color = Color.DKGRAY
-                            canvas?.drawCircle(point.x, point.y, 120F, paint)
-                            break
-                        }
-                        k++
+        while (i < 10) {
+            if (mActivePointers[i]) {
+                val point: PointF = positions[i]
+                if(isTimerDone){
+                    if(i == randoNumbers[0]){
+                        paint.color = colors[i]
+                        canvas?.drawText("1", point.x + 110f, point.y, textPaint)
+                    }else{
+                        paint.color = Color.DKGRAY
                     }
-                }
-                i++
-            }
-
-        }
-        else
-        {
-            while (i < 10) {
-                if(mActivePointers[i]){
+                }else{
                     paint.color = colors[i]
-                    val point: PointF = positions[i]
-                    canvas?.drawCircle(point.x, point.y, 120F, paint)
                 }
-                i++
+                canvas?.drawCircle(point.x, point.y, 120F, paint)
             }
+            i++
         }
-
     }
 }
