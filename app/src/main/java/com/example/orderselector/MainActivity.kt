@@ -8,12 +8,72 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.content.IntentSender
+import android.content.IntentSender.SendIntentException
+import android.util.Log
+import androidx.fragment.app.FragmentActivity
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
+import com.google.android.play.core.install.model.InstallStatus
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.install.InstallState
+
+import com.google.android.play.core.install.InstallStateUpdatedListener
+
+
+
+
+
+
+
+
+
+
 
 class MainActivity : AppCompatActivity() {
+
     lateinit var orderPlayersButton : Button
     lateinit var selectFirstPlayerButton : Button
     lateinit var flipCoinButton : Button
     lateinit var rollDiceButton : Button
+    private val RC_APP_UPDATE = 1
+
+    override fun onStart() {
+        super.onStart()
+        var mAppUpdateManager: AppUpdateManager? = null
+
+        val installStateUpdatedListener: InstallStateUpdatedListener =
+            object : InstallStateUpdatedListener {
+                override fun onStateUpdate(state: InstallState) {
+                    if (state.installStatus() == InstallStatus.INSTALLED) {
+                        mAppUpdateManager?.unregisterListener(this)
+                    }
+                }
+            }
+
+        mAppUpdateManager = AppUpdateManagerFactory.create(this)
+
+        mAppUpdateManager?.registerListener(installStateUpdatedListener)
+
+        mAppUpdateManager?.appUpdateInfo?.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE /*AppUpdateType.IMMEDIATE*/)
+            ) {
+                try {
+                    mAppUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        AppUpdateType.IMMEDIATE /*AppUpdateType.IMMEDIATE*/,
+                        this@MainActivity,
+                        RC_APP_UPDATE
+                    )
+                } catch (e: SendIntentException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +94,6 @@ class MainActivity : AppCompatActivity() {
         rollDiceButton.setOnClickListener {
             openActivityRollDice()
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
